@@ -75,7 +75,7 @@
 
 @media (max-width: 768px) {
   .mealdetails-modal {
-
+    box-shadow: none;
     width: 320px;
 
 
