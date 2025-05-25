@@ -98,8 +98,8 @@
 
   .HomePageMealList>* {
     flex: 1 1 calc(33.33% - 16px);
-    min-width: 330px;
-    max-width: 340px;
+    min-width: 320px;
+    max-width: 330px;
     box-sizing: border-box;
   }
 
