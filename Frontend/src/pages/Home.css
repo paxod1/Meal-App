@@ -1,0 +1,119 @@
+.HomePageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.HomePageContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 3%;
+
+}
+
+.HomePageSidebar {
+  flex: 1 1 220px;
+  max-width: 250px;
+  position: fixed;
+}
+
+.HomePageMealArea {
+  flex: 3 1 600px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 340px;
+}
+
+.HomePageMealList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+
+.HomePageMealList>* {
+  flex: 1 1 calc(33.33% - 16px);
+  min-width: 220px;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+/* search style */
+.SearchBarWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-top: 100px;
+  padding-left: 340px;
+}
+
+.SearchBarWithIcon {
+  position: relative;
+  width: 60%;
+  max-width: 500px;
+}
+
+.MealSearchInput {
+  width: 100%;
+  padding: 12px 18px 12px 45px; /* space for icon */
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.MealSearchInput:focus {
+  border-color: #007bff;
+}
+
+.SearchIcon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #888;
+  pointer-events: none;
+}
+
+
+
+@media (max-width: 1024px) {
+  .HomePageMealList>* {
+    flex: 1 1 calc(50% - 16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .HomePageMealArea {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .HomePageMealList>* {
+    flex: 1 1 calc(33.33% - 16px);
+    min-width: 400px;
+    max-width: 450px;
+    box-sizing: border-box;
+  }
+
+  .HomePageMealList {
+    justify-content: center;
+  }
+
+  .SearchBarWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-top: 100px;
+    padding-left: 0;
+    margin-right: 50px;
+  }
+}
