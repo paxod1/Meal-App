@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import "./Home.css";
 import Loading from "../components/Loading";
 import { FaSearch } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 
 const HomePage = () => {
@@ -47,24 +48,57 @@ const HomePage = () => {
     fetchMeals();
   }, [selectedCategory]);
 
-  // add or remove meal from favourites with confirmation 
+  // add or remove meal from favourites with confirmation using toast to look atractive
   const toggleFavouriteMeal = (meal) => {
     const alreadyLiked = favouriteMeals.find((item) => item.idMeal === meal.idMeal);
-    if (alreadyLiked) {
-      const confirmRemoval = window.confirm(
-        `Meal is Already Added To favorite. Are you sure you want to remove "${meal.strMeal}" from favourites?`
-      );
-      if (!confirmRemoval) return;
 
-      const updatedList = favouriteMeals.filter((item) => item.idMeal !== meal.idMeal);
-      setFavouriteMeals(updatedList);
-      sessionStorage.setItem("favouriteMeals", JSON.stringify(updatedList));
+    if (alreadyLiked) {
+      toast((t) => (
+        <span>
+          <b>{meal.strMeal}</b> is already in favourites.<br />
+          <button
+            style={{
+              background: "#f87171",
+              color: "#fff",
+              border: "none",
+              marginTop: "8px",
+              padding: "6px 12px",
+              borderRadius: "5px",
+              cursor: "pointer"
+            }}
+            onClick={() => {
+              const updatedList = favouriteMeals.filter((item) => item.idMeal !== meal.idMeal);
+              setFavouriteMeals(updatedList);
+              sessionStorage.setItem("favouriteMeals", JSON.stringify(updatedList));
+              toast.dismiss(t.id);
+              toast.success(`Removed "${meal.strMeal}" from favourites.`);
+            }}
+          >
+            Yes, Remove
+          </button>
+          <button
+            style={{
+              marginLeft: "10px",
+              marginTop: "8px",
+              padding: "6px 12px",
+              border: "1px solid #aaa",
+              borderRadius: "5px",
+              cursor: "pointer"
+            }}
+            onClick={() => toast.dismiss(t.id)}
+          >
+            Cancel
+          </button>
+        </span>
+      ), { duration: 5000 });
     } else {
       const updatedList = [...favouriteMeals, meal];
       setFavouriteMeals(updatedList);
       sessionStorage.setItem("favouriteMeals", JSON.stringify(updatedList));
+      toast.success(`Added "${meal.strMeal}" to favourites.`);
     }
   };
+
 
   // fetch detailed information of a meal by meal ID and update state
   const showMealDetails = async (mealId) => {
