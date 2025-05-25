@@ -5,7 +5,7 @@ const MealCard = ({ meal, onDetail, onFavorite, isFavorite }) => (
   <div className="mealcard-container">
     <img
       src={meal.strMealThumb}
-      alt={meal.strMeal}
+      alt='meal'
       className="mealcard-image"
     />
     <h3 className="mealcard-title">{meal.strMeal}</h3>
