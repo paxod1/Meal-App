@@ -47,7 +47,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-top: 100px;
   padding-left: 340px;
 }
@@ -111,8 +111,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
-    padding-top: 100px;
+    margin-bottom: 10px;
+    padding-top: 90px;
     padding-left: 0;
     margin-right: 50px;
   }
