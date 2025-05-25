@@ -59,7 +59,7 @@ const Favorites = () => {
           </button>
         </div>
       </span>
-    ), { duration: 5000 });
+    ), { duration: 4000 });
   };
 
   // calling api function to get meal details and store to state (with async/await + axios)
