@@ -4,7 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import { fetchMealDetails } from "../services/mealApi";
 import "./Favorites.css";
-import toast from "react-hot-toast";
+import Swal from 'sweetalert2';
 
 const Favorites = () => {
   const [favoriteList, setFavoriteList] = useState([]);
@@ -19,48 +19,27 @@ const Favorites = () => {
   }, []);
 
   // remove meal from favourite section
+
   const handleRemoveMeal = (meal) => {
-    toast((t) => (
-      <span>
-        Are you sure you want to remove <b>"{meal.strMeal}"</b>?
-        <div style={{ marginTop: "8px" }}>
-          <button
-            style={{
-              background: "#ef4444",
-              color: "white",
-              border: "none",
-              padding: "6px 12px",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontFamily: 'sans-serif'
-            }}
-            onClick={() => {
-              const updatedList = favoriteList.filter((item) => item.idMeal !== meal.idMeal);
-              setFavoriteList(updatedList);
-              sessionStorage.setItem("favouriteMeals", JSON.stringify(updatedList));
-              toast.success(`Removed "${meal.strMeal}" from favorites`);
-              toast.dismiss(t.id);
-            }}
-          >
-            Yes, Remove
-          </button>
-          <button
-            style={{
-              marginLeft: "10px",
-              padding: "6px 12px",
-              border: "1px solid #aaa",
-              borderRadius: "4px",
-              cursor: "pointer",
-              fontFamily: 'sans-serif'
-            }}
-            onClick={() => toast.dismiss(t.id)}
-          >
-            Cancel
-          </button>
-        </div>
-      </span>
-    ), { duration: 4000 });
-  };
+    Swal.fire({
+      title: `Remove "${meal.strMeal}"?`,
+      text: "Are you sure you want to remove this meal from your favorites?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, Remove",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedList = favoriteList.filter((item) => item.idMeal !== meal.idMeal);
+        setFavoriteList(updatedList);
+        sessionStorage.setItem("favouriteMeals", JSON.stringify(updatedList));
+
+        Swal.fire("Removed!", `"${meal.strMeal}" has been removed from favorites.`, "success");
+      }
+    });
+  }
 
   // calling api function to get meal details and store to state (with async/await + axios)
   const handleViewDetails = async (mealId) => {
